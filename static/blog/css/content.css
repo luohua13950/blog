@@ -1,0 +1,181 @@
+.content{
+    height: auto;
+    width:100%;
+    /*background-color: blueviolet;*/
+}
+.middle{
+    width: auto;
+    /*height: 1118px;*/
+    /*height: 960px;*/
+    float: left;
+    margin:10px 0px 10px 10px;
+    border-top:1px solid rgb(228,229,228);
+
+    /*background-color: aqua;*/
+
+}
+.middle ul{
+    list-style: none;
+    margin: 20px 0px 0px 0px;
+    padding: 0px;
+    float: left;
+}
+.middle li{
+    height: 360px;
+    width: 300px;
+    float: left;
+    border: 1px solid rgb(222,223,222);
+    border-radius: 10px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+
+}
+.middle li img{
+    background-repeat: no-repeat;
+    height: 220px;
+    width: 300px;
+    z-index: 20;
+    /*position: relative;*/
+	box-shadow:0 0 20px #000;
+}
+.abstract{
+    height: 140px;
+
+
+}
+.abstract h4{
+    margin: 0px;
+    padding: 0px;
+}
+.abstract p,span{
+    font-size: 15px;
+    font-family: 微软雅黑;
+    color: rgb(86,89,86);
+
+}
+.abstract span{
+    color: rgb(46,46,46);
+    font-size: 10px;
+    padding-left: 10px;
+}
+
+.page{
+    width: 999px;
+    height: 38px;
+    margin: 0px auto;
+
+}
+.page ul{
+    list-style: none;
+    margin: 0px 0px 0px 240px;
+
+}
+.page li{
+    height: 38px;
+    float: left;
+    border: 1px solid rgb(46,46,46) ;
+    border-radius: 1px;
+    padding: 0px 20px;
+
+}
+.page li a{
+    text-decoration: none;
+    line-height: 38px;
+    text-align: center;
+    font-size: 16px;
+    display: block;
+    width: 100%;
+}
+.page li a:hover{
+    background-color: darkgrey;
+    width: 100%;
+}
+
+.left{
+    width: 300px;
+    height: 400px;
+    /*margin-top: 10px;*/
+    margin-right: 20px;
+    float: left;
+    background-color: blueviolet;
+
+}
+
+.right{
+    width: 300px;
+    height: 400px;
+    float: right;
+    margin-left: 20px;
+    /*margin-top: 10px;*/
+    background-color: green;
+
+}
+p{
+    margin: 0px;
+    padding: 0px;
+}
+
+.titles{
+    height: 110px;
+    border-bottom: 1px solid green;
+}
+.titles h1{
+    text-align: center;
+}
+.titles small,span{
+    display: block;
+    text-align: center;
+
+}
+
+.article{
+    background-color: aqua;
+    margin-top: 20px;
+    font-family: 微软雅黑;
+}
+.recommend{
+        height: 160px;
+    margin-top: 10px;
+
+    border-bottom: 1px solid rgb(123,124,124);
+    border-top: 1px solid rgb(123,124,124);
+}
+.comment{
+    margin: 10px auto;
+    width: auto;
+    /*border-top: 1px solid rgb(123,124,124);*/
+}
+.comment textarea{
+    margin-top: 10px;
+    width: 99%;
+    height: 80px;
+    border-radius: 5px;
+}
+.submits{
+    float: right;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    width: 70px;
+    height: 30px;
+    background-color: red;
+    color: white;
+}
+.submits:hover{
+    cursor: pointer;
+}
+.subcomment{
+    margin-top: 20px;
+    height: 40px;
+}
+.subcomment p {
+    /*display: inline-block;*/
+    margin: 0px;
+    padding:5px 0px 5px 10px;
+    font-family:STXinwei;
+}
+.subcomment span {
+    display: inline-block;
+}
+
+/*https://blog.csdn.net/sinat_39430615/article/details/77142137*/

@@ -1,0 +1,44 @@
+
+.header{
+    height: 64px;
+    width: 960px;
+    background-color: rgb(247,248,249);
+    margin: 0px auto;
+    /*position: relative;*/
+    /*top: 5px;*/
+}
+.title{
+    list-style: none;
+    margin: 0px auto;
+    padding: 0px;
+    height: 64px;
+    float: left;
+    /*position: absolute;*/
+
+
+}
+.title li{
+    float: left;
+    height: 64px;
+    padding-left: 17px;
+
+}
+.title li a{
+    color: rgb(123,124,124);
+}
+
+.login{
+    float: right;
+}
+.header a{
+    text-decoration: none;
+    text-align: center;
+    line-height: 64px;
+    font-size: 20px;
+    font-family: 微软雅黑;
+    color: rgb(187,124,124);
+}
+.header a:hover{
+    color: rgb(247,209,164);
+    border-bottom: 1px solid silver;
+}
