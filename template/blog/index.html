@@ -1,3 +1,5 @@
+{% extends "blog/base.html"%}
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
@@ -25,106 +27,39 @@
     </div>
 </div>
 <div class="content">
-    <div class="left">dasssssssss</div>
-    <div class="right">fddfdfdfdf</div>
-    <div class="middle">
-        <ul>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="i{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-            <li>
-                <a href="">
-                    <img src="{% static 'blog/img/newton.jpg' %}" alt=""/>
-                </a>
-                <div class="abstract">
-                    <h4>这是一次测试</h4>
-                    <p>3.0版本的ASGI通信只是搭了个架子，还不能原生支持，依然需要使用cha...</p>
-                    <span>序偶小黄人</span><span>2019-10-25</span><span>1145次</span><span>2评论</span>
-                </div>
-            </li>
-
-        </ul>
-
+    <div class="left">            {% block left %}
+        hgfhfg
+    {% endblock left %}</div>
+    <div class="right">
+        {% block right %}
+            hfghfgf
+    {% endblock right %}
     </div>
+    <div class="middle">
+        {% block content %}
+        <ul>
+        {% for post in post_list %}
+            <li>
+                <a href="{{ post.get_absulute_url }}">
+                    <img src="{% static 'blog/img/django.jpg' %}" alt=""/>
+                </a>
+                <div class="abstract">
+                    <h4><a href="{{ post.get_absulute_url }}">{{ post.title}}</a></h4>
+                    <p>{{ post.excerpt }}</p>
+                    <div class="aritcle_info">
+                        <span>{{ post.author }}</span><span>{{ post.created_time }}</span><span>{{ post.views }}人围观</span><span>2评论</span>
+                    </div>
 
-    <div class="page">
+                </div>
+            </li>
+
+        {% endfor %}
+        </ul>
+    {% endblock content %}
+    </div>
+    <div class="clear"></div>
+{% block page %}
+        <div class="page">
     <ul>
         <li><a href="">上一页</a></li>
         <li><a href="">1</a></li>
@@ -134,6 +69,7 @@
         <li><a href="">下一页</a></li>
     </ul>
 </div>
+    {% endblock page %}
 </div>
 
 <div class="footer">

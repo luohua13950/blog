@@ -1,19 +1,21 @@
 .content{
-    height: auto;
+    height: 100%;
     width:100%;
     /*background-color: blueviolet;*/
 }
 .middle{
-    width: auto;
+    width: 1000px;
+    height: 100%;
     /*height: 1118px;*/
     /*height: 960px;*/
     float: left;
-    margin:10px 0px 10px 10px;
+    margin:10px 0px 10px 100px;
     border-top:1px solid rgb(228,229,228);
 
     /*background-color: aqua;*/
 
 }
+.clear{ clear:both}
 .middle ul{
     list-style: none;
     margin: 20px 0px 0px 0px;
@@ -40,6 +42,7 @@
 }
 .abstract{
     height: 140px;
+    margin-top: 10px;
 
 
 }
@@ -47,8 +50,12 @@
     margin: 0px;
     padding: 0px;
 }
+.abstract h4 a{
+    text-decoration: none;
+}
 .abstract p,span{
     font-size: 15px;
+    margin-top: 10px;
     font-family: 微软雅黑;
     color: rgb(86,89,86);
 
@@ -58,6 +65,7 @@
     font-size: 10px;
     padding-left: 10px;
 }
+
 
 .page{
     width: 999px;
@@ -97,7 +105,7 @@
     /*margin-top: 10px;*/
     margin-right: 20px;
     float: left;
-    background-color: blueviolet;
+    /*background-color: blueviolet;*/
 
 }
 
@@ -107,7 +115,7 @@
     float: right;
     margin-left: 20px;
     /*margin-top: 10px;*/
-    background-color: green;
+    /*background-color: green;*/
 
 }
 p{
@@ -120,16 +128,18 @@ p{
     border-bottom: 1px solid green;
 }
 .titles h1{
-    text-align: center;
+    /*text-align: center;*/
 }
 .titles small,span{
-    display: block;
+    /*display: block;*/
     text-align: center;
 
+}
+.aritcle_info{
+    margin-top: 10px;
 }
 
 .article{
-    background-color: aqua;
     margin-top: 20px;
     font-family: 微软雅黑;
 }

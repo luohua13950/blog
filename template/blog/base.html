@@ -8,17 +8,20 @@
     <link rel="stylesheet" href="{% static  'blog/css/content.css' %}"/>
     <link rel="stylesheet" href="{% static 'blog/css/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'blog/css/footer.css' %}"/>
+{#    <link rel="stylesheet" href="{% static 'blog/css/code.css' %}">   #}
+
+
+
 </head>
 <body>
 <div class="header">
     <ul  class="title">
-        <li><a href="">学习</a></li>
+        <li><a href="{% url "post:index" %}">首页</a></li>
         <li><a href="">博客</a></li>
         <li><a href="">教程</a></li>
-        <li><a href="">测试</a></li>
+        <li><a href="">爬虫相关</a></li>
         <li><a href="">公众号</a></li>
         <li><a href="">python学习</a></li>
-        <li><a href="">公众号</a></li>
     </ul>
     <div class="login">
         <a href="">登录</a>
@@ -26,24 +29,19 @@
 </div>
 <div class="content">
     <div class="left">
-        fdfdfdddd
+        {% block left %}
+    {% endblock left %}
     </div>
-<div class="right">424242424</div>
+<div class="right">
+            {% block right %}
+    {% endblock right %}
+</div>
     <div class="middle">
         {% block content %}
-    <p>
-        <br/>python学习
-        <br/>python学习
-        <br/>python学习
-        <br/>python学习
-        <br/>python学习
-        <br/>python学习
-        <br/>python学习
-        <br/>python学习
-        <br/>python学习
-    </p>
+
         {% endblock content %}
     </div>
+<div class="clear"></div>
 
 {% block page %}
 
@@ -57,5 +55,6 @@
         <li><a href="">联系我</a></li>
     </ul>
 </div>
+
 </body>
 </html>

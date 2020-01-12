@@ -1,20 +1,11 @@
 {% extends 'blog/base.html' %}
 {% block content %}
    <div class="titles">
-        <h1>这是测试这是测试这是测试</h1>
-       <small>罗华  阅读：4555 时间：89-56-44 55评论</small>
+        <h1>{{ post.title }}</h1>
+       <small>作者:{{ post.author }} &nbsp&nbsp发布时间:{{ post.created_time }} &nbsp&nbsp {{ post.views }}人围观 &nbsp&nbsp留下55条评论</small>
    </div>
     <div class="article">
-    <p>如果你有过其它编程背景，或者使用过一些在HTML中直接混入程序代码的语言，
-        那么你需要记住，Django的模版系统并不是简单的将Python嵌入到HTML中。</p>
-        <p>如果你有过其它编程背景，或者使用过一些在HTML中直接混入程序代码的语言，
-        那么你需要记住，Django的模版系统并不是简单的将Python嵌入到HTML中。</p>
-        <p>如果你有过其它编程背景，或者使用过一些在HTML中直接混入程序代码的语言，
-        那么你需要记住，Django的模版系统并不是简单的将Python嵌入到HTML中。</p>
-        <p>如果你有过其它编程背景，或者使用过一些在HTML中直接混入程序代码的语言，
-        那么你需要记住，Django的模版系统并不是简单的将Python嵌入到HTML中。</p>
-        <p>如果你有过其它编程背景，或者使用过一些在HTML中直接混入程序代码的语言，
-        那么你需要记住，Django的模版系统并不是简单的将Python嵌入到HTML中。</p>
+        {{ post.body|safe }}
     </div>
     <div class="recommend">
         <p>上一篇：这是测试这是测试这是测试</p>
