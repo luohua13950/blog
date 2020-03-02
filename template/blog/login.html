@@ -1,0 +1,85 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="{% static  'blog/css/content.css' %}"/>
+    <script src={% static "blog/js/jquery-2.1.3.min.js" %}></script>
+    <script src={% static "blog/js/index.js" %}></script>
+</head>
+<body style="background-color: rgb(224,228,232)">
+<div class="main_login">
+    <div class="login_form">
+        <div class="login_title">
+            <a id="tab_one" href="" onmouseenter="hovers('tab_one')">账号密码登录</a>
+            <a id="tab_two" href="" onmouseenter="hovers('tab_two')">账号注册</a>
+        </div>
+        <div class="tab_one show">
+            <form action="{{ url }}" method="post">
+                {% csrf_token %}
+                <div class="user">
+                    <input type="text" class="username" placeholder="用户名" style="border:1px solid rgb(206,212,218);">
+                </div>
+                <div class="pwd">
+                    <input type="password" class="password" placeholder="密码" style="border:1px solid rgb(206,212,218);">
+                </div>
+                <div class="sub_btn">
+                    <input type="button" class="sub_login" value="登录" onclick="login(url,ref)">
+                </div>
+            </form>
+        </div>
+        <div class="tab_two hide">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="user">
+                    <input type="text" class="username1" id="ur" placeholder="用户名"  style="border:1px solid rgb(206,212,218);">
+                </div>
+                <div class="pwd">
+                    <input type="password" class="password1" id="pw" placeholder="密码" style="border:1px solid rgb(206,212,218);">
+                </div>
+                <div class="pwd2">
+                    <input type="password" class="password2" id="pw2" placeholder="重复密码" style="border:1px solid rgb(206,212,218);">
+                </div>
+                <div class="email">
+                    <input type="email" class="eml" id="em" placeholder="邮箱" style="border:1px solid rgb(206,212,218);">
+                </div>
+                <div class="sub_btn">
+                    <input type="button" class="sub_register" value="注册" onclick="register(r_url,ref)">
+                </div>
+            </form>
+            <p class="msg" style="text-align: center"></p>
+        </div>
+    </div>
+</div>
+<script>
+    var url = {% url "account:login" %};
+    var r_url = "{{ r_url }}";
+    var ref = "{{ ref }}"
+    function hovers(tab) {
+        oDiv =document.getElementById(tab);
+        var oP = oDiv.parentNode;
+        var siblings = oP.children;
+        for (var i =0;i <siblings.length;i++){
+            cl = siblings[i].id;
+            if (siblings[i] !== oDiv ){
+                divs = document.getElementsByClassName(siblings[i].id);
+                //tab_other =document.getElementById(siblings[i].id);
+                //tab_other.css("border-bottom","none");
+                divs[0].classList.remove("show");
+                divs[0].classList.add("hide");
+            }
+            else {
+                    dv = document.getElementsByClassName(tab);
+                    //tab_main =document.getElementById(tab);
+                    //tab_main.css("border-bottom","2px solid rgb(202,12,22)");
+                    dv[0].classList.remove("hide");
+                    dv[0].classList.add("show");
+            }
+        }
+
+    }
+
+</script>
+</body>
+</html>

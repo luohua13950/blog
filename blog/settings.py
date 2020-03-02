@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '47!-e)rc)#g*@5w#d%4hm+58ge*2hva82-t+-dq!s(u#+u!xxb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['www.happyhong.cn',"127.0.0.1"]
+# ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
+    "comment",
+    "account",
+    "posts.templatetags",
+    "config",
+    "developer_diaries",
 ]
 
 MIDDLEWARE = [
@@ -48,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'blog.middleware.RequestHeaderMixin',
 ]
 
 ROOT_URLCONF = 'blog.urls'
@@ -75,18 +83,18 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
     # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'blog_test',
-    #     'USER':'luohua',
-    #     'PASSWORD':'1qaz@WSX',
-    #     'HOST':'118.25.181.239',
-    #     'PORT':'3306',
-    #     }
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'blog_test',
+        'USER':'luohua',
+        'PASSWORD':'1qaz@WSX',
+        'HOST':'118.25.181.239',
+        'PORT':'3306',
+        }
 }
 
 
@@ -119,13 +127,14 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'zh-hans'
 
 # 把国际时区改为中国时区（东八区）
+# 如果USE_TZ设置为True时，Django会使用系统默认设置的时区，即America/Chicago，此时的TIME_ZONE不管有没有设置都不起作用。
 TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
@@ -148,5 +157,5 @@ STATICFILES_DIRS  = (
                 )
 
 
-#MEDIA_ROOT
+# MEDIA_ROOT = "/img/"
 #AUTH_USER_MODEL

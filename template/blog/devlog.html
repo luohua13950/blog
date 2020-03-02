@@ -1,0 +1,49 @@
+{% extends "blog/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <div class="middle">
+        <div class="diaries_list">
+            {% for dev in dev_list %}
+                <div class="diaries">
+                    <h4 class="function_name">
+                        {% if dev.optimize_or_new == "OPT" %}
+                            <span class="function_optimaze">优化</span>
+                            {% else %}
+                            <span class="function_new">新增</span>
+                        {% endif %}
+                        {{ dev.designation }}
+                    {% if dev.istop %}
+                        <span style="color: #66d9ef;font-size: 16px">[置顶]</span>
+                    {% endif %}
+                    </h4>
+                    <div class="dev_content">
+                        {{ dev.content|safe }}
+                    </div>
+                    <div class="dev_info">
+                        <span>创建时间:{{ dev.create_time }}</span>
+                        <span>|</span>
+                        <span>&nbsp&nbsp{{ dev.developer }}</span>
+                        <span>|</span>
+                        <span>&nbsp&nbsp计划:{{ dev.planed_complete_time|date:"Y-m-d" }}</span>
+                        <span>|</span>
+                        {% if dev.is_completed %}
+                            <span style="color:#ca0c16;font-weight: bold">&nbsp&nbsp已完成</span>
+                            <span>|</span>
+                            <span><a href="{{ dev.link }}" >点我跳转到记录功能实现的网页</a></span>
+                        {% else %}
+                            <span >&nbsp&nbsp未完成</span>
+                        {% endif %}
+                    </div>
+                </div>
+        {% endfor %}
+            </div>
+    </div>
+{% endblock content %}
+</body>
+</html>

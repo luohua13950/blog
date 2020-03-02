@@ -1,60 +1,117 @@
 {% load staticfiles %}
+{% load common_tag %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
     <title>主页</title>
+    {% block link %}
     <link rel="stylesheet" href="{% static 'blog/css/index.css'  %}"/>
     <link rel="stylesheet" href="{% static  'blog/css/content.css' %}"/>
     <link rel="stylesheet" href="{% static 'blog/css/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'blog/css/footer.css' %}"/>
-{#    <link rel="stylesheet" href="{% static 'blog/css/code.css' %}">   #}
+    <link rel="stylesheet" href="{% static 'blog/css/monokai.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/diaries.css' %}">
 
+        <script src={% static "blog/js/jquery-2.1.3.min.js" %}></script>
+        <script src={% static "blog/js/index.js" %}></script>
+    {% endblock link %}
 
 
 </head>
-<body>
+<body >
+
 <div class="header">
+{% block header %}
     <ul  class="title">
-        <li><a href="{% url "post:index" %}">首页</a></li>
-        <li><a href="">博客</a></li>
-        <li><a href="">教程</a></li>
-        <li><a href="">爬虫相关</a></li>
-        <li><a href="">公众号</a></li>
-        <li><a href="">python学习</a></li>
+        {% get_menu as menu %}
+        {% for mn in menu %}
+            <li><a href="{{ mn.url }}" title="{{ mn.created_time }}">{{ mn.menu_name }}</a></li>
+        {% endfor %}
+
     </ul>
     <div class="login">
-        <a href="">登录</a>
+    {% if request.user.is_authenticated%}
+        <div class="login_name">
+            <a href="#">{{ request.user.username }}</a>
+        </div>
+        <div class="dropdown-content">
+            <a href="#">收藏列表</a>
+            <a href="#">通知</a>
+            <a href="{% url "account:logout" %}">退出</a>
+        </div>
+    {% else %}
+        <div class="no_login">
+            <a href="{% url "account:to_login" %}">登录</a>
+        </div>
+
+    {% endif %}
     </div>
+{% endblock header %}
 </div>
 <div class="content">
     <div class="left">
         {% block left %}
     {% endblock left %}
     </div>
+    {% block right %}
 <div class="right">
-            {% block right %}
-    {% endblock right %}
-</div>
-    <div class="middle">
-        {% block content %}
+        <div id="tab_list">
+            <ul id="tab_title">
+                <li class="act"><a href="{% url "post:hot" %}" onclick="return false">热门文章</a></li>
+                <li ><a href="{% url "post:recent" %}" onclick="return false">最近更新</a></li>
+                <li ><a href="{% url "post:error" %}" onclick="return false">点赞排行</a></li>
+            </ul>
+            <div class="show">
+                {% get_hot_post as hot %}
+            <ul>
+                {% for ht in hot %}
+{#                    <li ><a href="{{ ht.get_absulute_url }}">{{ forloop.counter }}.{{ ht.title }}</a></li>#}
+                    <li ><a href="{{ ht.get_absulute_url }}">{{ ht.title }}</a> &nbsp;&nbsp;<span>{{ ht.created_time|date:"m-d" }}</span></li>
+                {% endfor %}
+            </ul>
 
-        {% endblock content %}
+            </div>
+                <div class="hide">
+
+            </div>
+            <div class="hide">
+
+            </div>
+        </div>
+
+</div>
+    {% endblock right %}
+{% block content %}
+    <div class="middle">
+
+
+
     </div>
+{% endblock content %}
 <div class="clear"></div>
 
 {% block page %}
 
 {% endblock page %}
 </div>
+   {% block footer %}
+        <div class="footer">
+            <ul>
+                <li><a href="">Copyright © 2020</a></li>
+                <li><a href="">滇ICP备18009362</a></li>
+                <li><a href="">联系我</a></li>
+            </ul>
+        </div>
+    {% endblock footer %}
+<div class="bg"></div>
+<script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
 
-<div class="footer">
-    <ul>
-        <li><a href="">Copyright © 2020</a></li>
-        <li><a href="">滇ICP备18009362</a></li>
-        <li><a href="">联系我</a></li>
-    </ul>
-</div>
+{% block script %}
+    <script>
+
+    </script>
+{% endblock script %}
 
 </body>
 </html>

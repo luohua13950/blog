@@ -1,0 +1,101 @@
+{% extends "blog/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+    <div class="middle">
+        <div class="diaries_list">
+
+            </div>
+    <div class="load_more"><a href="javascript:void(0)" id="load_more" onclick="load_data()">加载更多</a></div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+    <script>
+    var page = 0;
+   $(document).ready(function () {
+            href = window.location.href;
+            keyword = "";
+            if( href.indexOf("category") !== -1){
+                keyword = "python"
+            }
+            if( href.indexOf("spider") !== -1){
+                keyword = "js"
+            }
+            url = "{% url "post:get_category" %}";
+            load_data();
+   });
+
+    function load_data() {
+        try {
+            $.ajax({
+                url: url,
+                data: {
+                    "page": page,
+                    "keyword":keyword
+                },
+                type: "POST",
+                success: function (data) {
+                    var post_type_html = "";
+
+                    var len = data.length;
+                    if (len > 0) {
+                        if(len <4){
+                            $("#load_more").html("没有更多了").removeAttr("onclick");
+                        }
+                        for (var i = 0; i < len; i++) {
+                            var istop_html = "";
+                            if (data[i]["fields"]["origin_or_reprint"] === "ORG") {
+                                post_type_html = '<span class="function_optimaze">原创</span>';
+                            } else {
+                                post_type_html = '<span class="function_new">转载</span>';
+                            }
+
+                            if (data[i]["fields"]["istop"] === true) {
+
+                                istop_html = '<span style="color: #66d9ef;font-size: 16px">[置顶]</span>';
+                            }
+                            var dt = new Date(data[i]["fields"]["created_time"]).format("yyyy-MM-dd hh:mm:ss");
+                            var html = '<div class="diaries"> <h4 class="function_name">' +
+                                post_type_html + '&nbsp&nbsp<a class="category_title" href="' + '/post/' + data[i]["pk"] + '/' + '">' +
+                                data[i]["fields"]["title"] + "</a>" + istop_html +
+                                '</h4>' +
+                                '<div class="dev_content">' +
+                                data[i]["fields"]["excerpt"] +
+                                '</div>' +
+                                '<div class="dev_info">' +
+                                '<span>' + data[i]["fields"]["author"] + '</span>' +
+                                '<span>|</span>' +
+                                '<span>&nbsp&nbsp' + dt + '</span>' +
+                                '<span>|</span>' +
+                                '<span>&nbsp&nbsp' + data[i]["fields"]["views"] + '次围观</span>' +
+                                '</div>' +
+                                '</div>';
+                            $(".diaries_list").append(html);
+
+                        }
+                         page +=1;
+                    } else {
+                        $("#load_more").html("没有更多了").removeAttr("onclick");
+                        return false
+                    }
+                }
+
+            });
+        }catch (e) {
+            console.log(e)
+        }
+    }
+
+
+    </script>
+{% endblock script %}
+
+</body>
+
+</html>

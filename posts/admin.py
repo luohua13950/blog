@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag,VisitorInfo
 
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'created_time', 'modify_time', 'category', 'author']
@@ -10,3 +10,4 @@ class PostAdmin(admin.ModelAdmin):
 admin.site.register(Post)
 admin.site.register(Category)
 admin.site.register(Tag)
+admin.site.register(VisitorInfo)

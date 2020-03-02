@@ -27,25 +27,26 @@
     </div>
 </div>
 <div class="content">
-    <div class="left">            {% block left %}
-        hgfhfg
-    {% endblock left %}</div>
-    <div class="right">
-        {% block right %}
-            hfghfgf
-    {% endblock right %}
+    <div class="left">
+        {% block left %}
+
+    {% endblock left %}
     </div>
+
+ {% block content %}
     <div class="middle">
-        {% block content %}
         <ul>
         {% for post in post_list %}
             <li>
-                <a href="{{ post.get_absulute_url }}">
-                    <img src="{% static 'blog/img/django.jpg' %}" alt=""/>
+                <a href="{{ post.get_absulute_url }}" onclick="get_ip({{ post.pk }})">
+{#                    <img src="{% static 'blog/img/django.jpg' %}" alt=""/>#}
+                    <div class="imgs">
+                        <img src="{{ post.cover_of_post }}" alt="{{ post.title }}" />
+                    </div>
                 </a>
                 <div class="abstract">
-                    <h4><a href="{{ post.get_absulute_url }}">{{ post.title}}</a></h4>
-                    <p>{{ post.excerpt }}</p>
+                    <h4><a href="{{ post.get_absulute_url }}" onclick="get_ip({{ post.pk }})">{{ post.title}}</a></h4>
+                    <p>{{ post.excerpt|truncatechars:60 }}</p>
                     <div class="aritcle_info">
                         <span>{{ post.author }}</span><span>{{ post.created_time }}</span><span>{{ post.views }}人围观</span><span>2评论</span>
                     </div>
@@ -55,21 +56,30 @@
 
         {% endfor %}
         </ul>
-    {% endblock content %}
+
     </div>
+ {% endblock content %}
     <div class="clear"></div>
+
 {% block page %}
         <div class="page">
-    <ul>
-        <li><a href="">上一页</a></li>
-        <li><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li><a href="">4</a></li>
-        <li><a href="">下一页</a></li>
-    </ul>
-</div>
-    {% endblock page %}
+            <ul>
+                {% if post_list.has_previous %}
+                    <li><a href={% url "post:pages" post_list.previous_page_number %}>上一页</a></li>
+                {% endif %}
+                {% for pg_num in post_list.paginator.page_range %}
+                    {% if  post_list.number == pg_num%}
+                        <li ><a id="action" href="javascript:return false;" >{{ pg_num }}</a></li>
+                    {% else %}
+                        <li><a href={% url "post:pages" pg_num %}>{{ pg_num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if post_list.has_next %}
+                    <li><a href={% url "post:pages" post_list.next_page_number %}>下一页</a></li>
+                {% endif %}
+            </ul>
+        </div>
+{% endblock page %}
 </div>
 
 <div class="footer">
@@ -79,5 +89,24 @@
         <li><a href="">联系我</a></li>
     </ul>
 </div>
+{% block script %}
+    <script type="text/javascript" >
+    function get_ip(pk) {
+     var ip = returnCitySN["cip"];
+     var position = returnCitySN["cname"];
+     var urls ="/ips/"+pk+"/"
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: urls,
+            data: {'ip': ip ,"position":position},
+            {#success: function (result) {#}
+            {#  alert('成功');},#}
+            {#error: function () {#}
+            {#    alert('错误');}#}
+        });
+    }
+</script>
+{% endblock %}
 </body>
 </html>

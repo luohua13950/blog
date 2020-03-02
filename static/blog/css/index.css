@@ -24,21 +24,64 @@
 
 }
 .title li a{
+
+    line-height: 64px;
+    font-size: 20px;
+    font-family: 微软雅黑;
+    /*color: rgb(187,124,124);*/
     color: rgb(123,124,124);
 }
 
 .login{
     float: right;
+    width: 80px;
+    text-align: center;
+    background-color: #bbbbbb;
+    position: relative;
+    display: inline-block;
+}
+
+.login:hover{
+    cursor: pointer;
+    background-color: #75715e;
+}
+.login a{
+    color: white;
+
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+
+}
+.dropdown-content a {
+    color: black;
+    padding: 10px 16px;
+    text-decoration: none;
+    display: block;
+}
+.login_name{
+
+}
+.login_name a{
+    line-height: 64px;
+}
+.login:hover .dropdown-content{
+    display: block;
+}
+.no_login a{
+    line-height: 64px;
+    font-size: 18px;
 }
 .header a{
     text-decoration: none;
     text-align: center;
-    line-height: 64px;
-    font-size: 20px;
-    font-family: 微软雅黑;
-    color: rgb(187,124,124);
+
 }
 .header a:hover{
     color: rgb(247,209,164);
-    border-bottom: 1px solid silver;
+    /*border-bottom: 1px solid silver;*/
 }

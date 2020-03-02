@@ -1,0 +1,90 @@
+a{
+    text-decoration: none;
+}
+
+.diaries_list{
+    height: 100%;
+}
+.diaries{
+    height:auto;
+    /*background-color: #A00000;*/
+    border-bottom: 1px solid rgb(228,229,228);
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+.diaries:hover{
+    background-color: rgb(245,246,247);
+    cursor: pointer;
+}
+.function_name{
+    margin: 0px;
+    font-size: 24px;
+}
+.function_new{
+    display: inline-block;
+    height: 24px;
+    width: 34px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 2px;
+    margin-top: 0px;
+    color:#ca0c16;
+    border: 1px solid #ca0c16 ;
+    background-color: #f9ecec;
+}
+.function_optimaze{
+    display: inline-block;
+    height: 24px;
+    width: 34px;
+    line-height: 24px;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 2px;
+    margin-top: 0px;
+    border: 1px solid #74cf59 ;
+    color: #74cf59;
+    background: #eaf9e3;
+}
+.dev_content{
+    font-size: 18px;
+    line-height: 22px;
+    white-space: normal;
+    color: #6b6b6b;
+    font-family: 'Microsoft YaHei','SF Pro Display',Roboto,Noto,Arial,'PingFang SC',sans-serif;
+    margin-top: 10px;
+
+}
+.dev_content p{
+    font-size: 18px;
+    line-height: 22px;
+    white-space: normal;
+    color: #6b6b6b;
+    font-family: 'Microsoft YaHei','SF Pro Display',Roboto,Noto,Arial,'PingFang SC',sans-serif;
+}
+.dev_info{
+    margin-top: 15px;
+}
+.dev_info span{
+    font-family: 'Microsoft YaHei','SF Pro Display',Roboto,Noto,Arial,'PingFang SC',sans-serif;
+    padding-right: 3px;
+}
+.dev_info span a{
+   text-decoration: none;
+    font-family: 'Microsoft YaHei','SF Pro Display',Roboto,Noto,Arial,'PingFang SC',sans-serif;
+    color: #74cf59;
+    font-size: 16px;
+}
+
+.category_title{
+    text-decoration: none;
+    color: #272822;
+}
+.load_more{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.load_more a{
+    font-size: 18px;
+}

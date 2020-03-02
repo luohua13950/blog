@@ -1,35 +1,173 @@
 {% extends 'blog/base.html' %}
+
 {% block content %}
-   <div class="titles">
-        <h1>{{ post.title }}</h1>
-       <small>作者:{{ post.author }} &nbsp&nbsp发布时间:{{ post.created_time }} &nbsp&nbsp {{ post.views }}人围观 &nbsp&nbsp留下55条评论</small>
+    <div class="middle">
+   <div class="titles" onblur="clur();">
+        <h1 id="title">{{ post.title }}</h1>
+       <small>作者:{{ post.author }} &nbsp&nbsp发布时间:{{ post.created_time }} &nbsp&nbsp <span id="views">{{ post.views }}</span>人围观 &nbsp&nbsp留下<span id="comment_num">{{ comment_count }}</span>条评论
+
+           &nbsp;&nbsp;<span class="tag"><a href="#">{{ post.category }}</a></span>
+       </small>
    </div>
-    <div class="article">
+    <div class="article" >
         {{ post.body|safe }}
+        <div class="like">
+            <div class="fave"></div>
+        </div>
+
+    </div>
+    <div class="inline_login">
+    <div class="login_header">
+    账号登录
+    </div>
+    <div class="login_form">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="user">
+                <input type="text" class="username" placeholder="用户名">
+            </div>
+            <div class="pwd">
+                <input type="password" class="password" placeholder="密码">
+            </div>
+            <div class="sub_btn">
+                <input type="button" class="sub_login" value="登录" onclick="login(url)">
+            </div>
+        </form>
+    </div>
+
     </div>
     <div class="recommend">
-        <p>上一篇：这是测试这是测试这是测试</p>
-        <p>下一篇：这是测试这是测试这是测试</p>
+        <div>上一篇：<a href="{{ pre_post.get_absulute_url }}">{{ pre_post.title  }}</a> &nbsp;&nbsp;<span>{{ pre_post.created_time|date:"m-d" }}</span> &nbsp;&nbsp;<span>阅读数:{{ pre_post.views }}</span></div>
+        <div>下一篇：<a href="{{ next_post.get_absulute_url }}">{{ next_post.title }}</a>&nbsp;&nbsp;<span>{{ next_post.created_time|date:"m-d" }}</span>&nbsp;&nbsp;<span>阅读数:{{ next_post.views }}</span></div>
     </div>
     <div class="comment">
-        <form action="">
-            <textarea name="" id=""  placeholder="评论"></textarea>
-            <input type="submit" class="submits" value="发表"/>
+    {% if user.is_authenticated%}
+
+        <form  method="post"  id="summit_form">
+            {% csrf_token %}
+            <textarea name="" id="context"  placeholder="评论"></textarea>
+            <input type="text" id="content_type" value="post" style="display: none">
+            <input type="text" id= "object_id" value="{{ post.pk }}" style="display: none">
+{#            不能为submmit,请添加 type='button' 属性，因为浏览器默认会认为 button 的属性是submit.type=‘submit’时会发生提交表单的默认行为#}
+            <input type="button" class="submits" value="发表" />
         </form>
-        <div class="subcomment">
-            <span>刘嘉M_allison</span> <span>2个月前</span> <span>4楼</span>
-        <p>那么你需要记住，Django的模版系统并不是简单的将Pyth过一些在HTML中直接混入程序代码的语言，</p>
+    {% else %}
+        <p>请<a id="comment_login" >登录</a>后再进行评论!</p>
+    {% endif %}
+    <p id="tips">提示</p>
+        <div class="comment_list">
+            {% for cm in comment %}
+                <div class="subcomment">
+                    <span id="nickname">{{cm.comment_auth }}</span>  <span>发表于{{ cm.create_time|date:'n-d H:i ' }}：</span>
+                <span id="comment_text">{{ cm.content |safe}}</span>
+                <div>
+                    {% if user.is_superuser %}
+                        <a href="javascript:void(0)" class="delete_comment" id="{{ cm.id }}" >删除此评论</a>
+                {% endif %}
+                </div>
+                </div>
 
-        </div>
-        <div class="subcomment">
-            <span>刘嘉M_allison</span> <span>2个月前</span> <span>4楼</span>
-        <p>那么你需要记住，Django的模版系统并不是简单的将Pyth过一些在HTML中直接混入程序代码的语言，</p>
+            {% empty %}
 
-        </div>
-          <div class="subcomment">
-            <span>刘嘉M_allison</span> <span>2个月前</span> <span>4楼</span>
-        <p>那么你需要记住，Django的模版系统并不是简单的将Pyth过一些在HTML中直接混入程序代码的语言，</p>
-
+                <p id="empty">暂无评论</p>
+            {% endfor %}
         </div>
     </div>
+</div>
 {% endblock content %}
+
+
+{% block script %}
+    <script type="text/javascript">
+    {#加上双引号才能访问到模板变量访问#}
+    $(".submits").click(function () {
+        $("#tips").css("display","none").html("");
+        var context = $("#context").val().trim();
+        if(context === ""||context.length <3){
+            $("#tips").css("display","block").html("请留下有意义的评论！");
+            return false
+        }
+        var pk = $("#object_id").val();
+        var content_type = $("#content_type").val();
+        $.ajax({
+           url:"{% url "comment:comment" %}",
+           data:{
+               "context":context,
+               "pk":pk,
+               "content_type":content_type
+           },
+            type:"POST",
+            cache:false,
+            success:function (data) {
+                if (data["status"] === "success"){
+                    var comment_html = '<div class="subcomment">'+'<span>'+data["user"]+'</span>'+'    <span>发表于'+data["time"]+'：</span>'+'<p>'+data["context"]+'</p>'+'</div>';
+                    $(".comment_list").prepend(comment_html);
+                    $("#comment_num").html(data["comment_num"]);
+                    $("#context").val("");
+                    $("#empty").attr("visibility","hidden").html("");
+                    $("#tips").css("display","block").html(data["message"]);
+
+                }else{
+                    {#console.log(data["message"]);#}
+                    $("#tips").css("display","block").html(data["message"]);
+                    return false
+                }
+            },
+            error:function (xhr) {
+                console.log("errors");
+            }
+        });
+
+
+    });
+
+$("#comment_login").click(function () {
+    $(".inline_login").css("display","block");
+    $(".bg").css("display","block");
+
+});
+
+$(".bg").click(function () {
+    $(".inline_login").hide();
+    $(".bg").hide();
+});
+    var url = {% url "account:login" %}
+//$("#sub_login").click(function () {
+
+    function clur() {
+        $("#title").css("font_size","22px")
+    };
+
+    $(".delete_comment").click(function () {
+        var comment_id = $(this).attr("id");
+        var pk = "{{post.pk}}";
+        var url="{% url "comment:delete_comment" %}";
+       $.ajax({
+            url:url,
+            type:"POST",
+            data:{
+                "comment_id":comment_id,
+                "pk":pk
+            },
+            success:function (data) {
+                if (data["status"] === "success"){
+                    span = document.getElementById(comment_id);
+                    parent = span.parentNode.parentNode;
+                    parent.remove();
+                }
+                else {
+                    return false
+                }
+            }
+        })
+    })
+
+    $(function() {
+    $('.fave').on('click', function() {
+      $(this).toggleClass("active");
+
+    })
+  })
+
+    </script>
+{% endblock script %}
