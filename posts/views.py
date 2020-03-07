@@ -11,6 +11,7 @@ from comment.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from utils import common
 from django.core import serializers
+from django.views.decorators.cache import cache_control
 # Create your views here.
 NUM = 10
 def index(req,pk=1):
@@ -50,13 +51,13 @@ def detail(request,pk):
     next_post = post.get_next_post() or Post.objects.first()
     pre_post =  post.get_pre_post() or Post.objects.last()
 
-    post.body = markdown.markdown(post.body,
+    body = markdown.markdown(post.body,
                                   extensions=[
                                       'markdown.extensions.extra',
                                       'markdown.extensions.codehilite',
                                       'markdown.extensions.toc',
                                   ])
-    context = {"post": post, 'next_post': next_post, 'pre_post': pre_post}
+    context = {"post": post, 'next_post': next_post, 'pre_post': pre_post,"body":body}
     context.update({"comment":comment,"comment_count":comment.count()})
     resp = render(request, "blog/detail.html",context )
     if not is_read:

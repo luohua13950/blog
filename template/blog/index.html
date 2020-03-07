@@ -35,7 +35,7 @@
 
  {% block content %}
     <div class="middle">
-        <ul>
+        <ul class="index">
         {% for post in post_list %}
             <li>
                 <a href="{{ post.get_absulute_url }}" onclick="get_ip({{ post.pk }})">

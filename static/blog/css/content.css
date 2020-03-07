@@ -7,7 +7,7 @@ input{
 	outline:none;
 }
 .middle{
-    width: 1200px;
+    width: 50%;
     height: 100%;
     /*height: 1118px;*/
     /*height: 960px;*/
@@ -19,13 +19,13 @@ input{
 
 }
 .clear{ clear:both}
-.middle ul{
+.index ul{
     list-style: none;
     margin: 20px 0px 0px 0px;
     padding: 0px;
     float: left;
 }
-.middle li{
+.index li{
     height: 400px;
     width: 380px;
     float: left;
@@ -35,7 +35,7 @@ input{
     margin-bottom: 10px;
 
 }
-.middle li img{
+.index li img{
     background-repeat: no-repeat;
     height: 260px;
     width: 378px;
@@ -61,7 +61,7 @@ input{
 .abstract h4 a{
     text-decoration: none;
     font-family: 'Microsoft YaHei','SF Pro Display',Roboto,Noto,Arial,'PingFang SC',sans-serif;
-    color: #D2413A;
+    color: #272822;
 }
 .abstract p,span{
     font-size: 15px;
@@ -137,7 +137,7 @@ input{
 }
 
 .right{
-    width: 420px;
+    /*width: 20%;*/
     height: auto;
     float: right;
     margin-left: 20px;
@@ -269,13 +269,17 @@ p{
 
 .article{
     margin-top: 20px;
-    font-size: 20px;
+    font-size: 15px;
     font-family: 'Microsoft YaHei','SF Pro Display',Roboto,Noto,Arial,'PingFang SC',sans-serif;
    color: #6b6b6b;
+
 }
 .article p{
     font-family: 'Microsoft YaHei','SF Pro Display',Roboto,Noto,Arial,'PingFang SC',sans-serif;
     color: #6b6b6b;
+}
+pre {
+    overflow: auto;
 }
 .recommend{
         height: 160px;

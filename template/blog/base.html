@@ -4,7 +4,9 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>主页</title>
+    {% block title %}
+    <title>从今天开始种树</title>
+    {% endblock title %}
     {% block link %}
     <link rel="stylesheet" href="{% static 'blog/css/index.css'  %}"/>
     <link rel="stylesheet" href="{% static  'blog/css/content.css' %}"/>
