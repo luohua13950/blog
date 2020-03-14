@@ -20,7 +20,7 @@ class DeveloperDiaries(models.Model):
     class Meta:
         verbose_name = "开发者日志"
         verbose_name_plural = verbose_name
-        ordering = ["-create_time"]
+        ordering = ["create_time"]
 
     def __str__(self):
         return self.designation+":"+self.get_optimize_or_new_display()
