@@ -1,0 +1,72 @@
+{% extends "blog/base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+        {% block title %}
+        <title>免费代理</title>
+    {% endblock title %}
+</head>
+<body>
+{% block content %}
+    <div class="middle">
+        <div class="statement">
+            <h3>免费代理是第三方代理服务器，收集自互联网，并非本站所有，本站不对免费代理的有效性负责。
+                请合法使用免费代理，由用户使用免费代理带来的法律责任与本站无关，
+                若免费代理侵犯了您的权益，请通过
+
+                <a href="">happyhong_cn@163.com</a>
+                及时告知，本站将在第一时间删除.所有代理每天都会测试连通性,使用时请优先选择分值为100的代理</h3>
+        </div>
+    <div class="list_proxies">
+        <table class="table">
+            <caption>
+                {% if not request.user.is_authenticated%}
+                    <h2>登录后查看更多优质代理 --><a href="{% url "account:to_login" %}">登录</a></h2>
+                {% endif %}
+            <h2>今日免费代理</h2>
+
+            </caption>
+            <tr>
+                <th>ip</th>
+                <th>端口</th>
+                <th>分值</th>
+                <th>当前状态</th>
+                <th>验证时间</th>
+            </tr>
+            {% for prx in proxies %}
+            <tr>
+                <td>{{  prx.host}}</td>
+                <td>{{ prx.port }}</td>
+                <td>{{ prx.score }}</td>
+                <td>{{ prx.status }}</td>
+                <td>{{ prx.valid_time }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        </div>
+
+    </div>
+{% endblock content %}
+
+{% block page %}
+        <div class="page">
+            <ul>
+                {% if proxies.has_previous %}
+                    <li><a href={% url "proxies:proxies" proxies.previous_page_number %}>上一页</a></li>
+                {% endif %}
+                {% for pg_num in proxies.paginator.page_range %}
+                    {% if  proxies.number == pg_num%}
+                        <li ><a id="action" href="javascript:return false;" >{{ pg_num }}</a></li>
+                    {% else %}
+                        <li><a href={% url "proxies:proxies" pg_num %}>{{ pg_num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if proxies.has_next %}
+                    <li><a href={% url "proxies:proxies" proxies.next_page_number %}>下一页</a></li>
+                {% endif %}
+            </ul>
+        </div>
+{% endblock page %}
+</body>
+</html>

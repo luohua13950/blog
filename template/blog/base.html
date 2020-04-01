@@ -8,12 +8,14 @@
     <title>从今天开始种树</title>
     {% endblock title %}
     {% block link %}
+    <link rel="icon" href="{% static 'blog/img/favicon.ico'  %}" type="image/x-icon" />
     <link rel="stylesheet" href="{% static 'blog/css/index.css'  %}"/>
     <link rel="stylesheet" href="{% static  'blog/css/content.css' %}"/>
     <link rel="stylesheet" href="{% static 'blog/css/common.css' %}"/>
     <link rel="stylesheet" href="{% static 'blog/css/footer.css' %}"/>
     <link rel="stylesheet" href="{% static 'blog/css/monokai.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/diaries.css' %}">
+    <link rel="stylesheet" href="{% static 'blog/css/proxies/proxies.css' %}">
 
         <script src={% static "blog/js/jquery-2.1.3.min.js" %}></script>
         <script src={% static "blog/js/index.js" %}></script>
@@ -72,7 +74,7 @@
             <ul id="tab_title">
                 <li class="act"><a href="{% url "post:hot" %}" onclick="return false">热门文章</a></li>
                 <li ><a href="{% url "post:recent" %}" onclick="return false">最近更新</a></li>
-                <li ><a href="{% url "post:error" %}" onclick="return false">点赞排行</a></li>
+                <li ><a href="#" onclick="return false">点赞排行</a></li>
             </ul>
             <div class="show">
                 {% get_hot_post as hot %}
@@ -87,9 +89,10 @@
                 <div class="hide">
 
             </div>
-            <div class="hide">
+                        <div class="hide">
 
             </div>
+
         </div>
 
 </div>

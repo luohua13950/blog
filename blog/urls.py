@@ -23,4 +23,5 @@ urlpatterns = [
     path("",include('account.urls')),
     path("",include('config.urls')),
     path("",include('developer_diaries.urls')),
+    path("",include('proxies.urls')),
 ]

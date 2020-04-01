@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '47!-e)rc)#g*@5w#d%4hm+58ge*2hva82-t+-dq!s(u#+u!xxb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = True# 生产部署必须设置为False
+DEBUG = False
+#DEBUG = True# 生产部署必须设置为False
 
 #这里请设置为自己的域名，没有域名暂时设置为自己服务器ip
 ALLOWED_HOSTS = ['www.happyhong.cn',"127.0.0.1"]
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "posts.templatetags",
     "config",
     "developer_diaries",
+    "proxies",
 ]
 
 MIDDLEWARE = [
@@ -164,13 +165,13 @@ STATICFILES_DIRS  = (
 CACHES = {
     'default':{
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION':"redis://118.25.181.239:7778/2",
+        'LOCATION':"redis://118.25.181.239:7778/1",
         'TIMEOUT': 200,   # NONE 永不超时
         'OPTIONS':{
                 "PASSWORD":"1qaz@WSX",#密码，没有可不设置
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient', #redis-py 客户端
                 'PICKLE_VERSION': -1, # 插件使用PICKLE进行序列化,-1表示最新版本
-                'CONNECTION_POOL_KWARGS': {"max_connections": 100}, # 连接池最大连接数
+                'CONNECTION_POOL_KWARGS': {"max_connections": 100,'decode_responses':True}, # 连接池最大连接数
                 'SOCKET_CONNECT_TIMEOUT': 5,    # 连接超时
                 'SOCKET_TIMEOUT': 5,    # 读写超时
                 }
