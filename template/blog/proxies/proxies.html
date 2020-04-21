@@ -28,6 +28,7 @@
 
             </caption>
             <tr>
+                <th>协议</th>
                 <th>ip</th>
                 <th>端口</th>
                 <th>分值</th>
@@ -36,6 +37,7 @@
             </tr>
             {% for prx in proxies %}
             <tr>
+                <td>{{  prx.http_type}}</td>
                 <td>{{  prx.host}}</td>
                 <td>{{ prx.port }}</td>
                 <td>{{ prx.score }}</td>

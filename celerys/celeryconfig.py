@@ -22,7 +22,7 @@ imports = [
 beat_schedule = {
     "save": {
         "task": "celerys.tasks.test1",  #执行的函数
-        "schedule": crontab(minute="*/1"),   # every minute 每分钟执行
+        "schedule": crontab(hour="*/1"),   # every minute 每分钟执行
         "args": ()  # # 任务函数参数
     },
 

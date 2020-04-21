@@ -1,6 +1,7 @@
 from django.utils.deprecation import MiddlewareMixin
 from django.shortcuts import redirect,reverse,render
 from django.http import JsonResponse
+
 class RequestHeaderMixin(MiddlewareMixin):
     USER_AGENT = "HTTP_USER_AGENT"
     #私人爬虫

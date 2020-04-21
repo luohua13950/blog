@@ -23,8 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '47!-e)rc)#g*@5w#d%4hm+58ge*2hva82-t+-dq!s(u#+u!xxb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-#DEBUG = True# 生产部署必须设置为False
+#DEBUG = False
+DEBUG = True# 生产部署必须设置为False
 
 #这里请设置为自己的域名，没有域名暂时设置为自己服务器ip
 ALLOWED_HOSTS = ['www.happyhong.cn',"127.0.0.1"]
@@ -144,7 +144,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_ROOT 是在部署的时候才发挥作用, 而实际情况下,静态文件的一般安放位置有两种:
 # 1.一种就是在每个app里面新建一个static文件夹,将静态文件放到里面,在加载静态文件时,比如要在模板中用到静态文件,
 # django会自动在每个app里面搜索static文件夹(所以,不要把文件夹的名字写错哦, 否则django就找不到你的文件夹了)

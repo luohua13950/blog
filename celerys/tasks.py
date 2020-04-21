@@ -57,8 +57,8 @@ def status(score):
 #celery -A celerys.app beat
 #celery -A celerys.app worker --loglevel=info
 if __name__ == '__main__':
-    test1()
-    # res = add.delay(3,4)
+    #test1()
+    res = test1.delay()
     # print(res.result)
     #print(res.get())
     #print(app.conf)
